@@ -2,16 +2,31 @@ package com.junefw.infra.modules.code;
 
 public class Code {
 
-// 	DTO
+	// 	DTO
+	// infrCodeGroup
 	private String ifcgSeq;
 	private String ifcgName;
 	private Integer ifcgDelNy;
+	//infrCode
+	private String ifcdSeq;
+	private String ifcdName;
+	private Integer ifcdDelNy;
+	private Integer ifcdOreder;
+//	private String ifcgSeq
+	
 //-----------	
+
 	public String getIfcgSeq() {
 		return ifcgSeq;
 	}
 	public void setIfcgSeq(String ifcgSeq) {
 		this.ifcgSeq = ifcgSeq;
+	}
+	public Integer getIfcdOreder() {
+		return ifcdOreder;
+	}
+	public void setIfcdOreder(Integer ifcdOreder) {
+		this.ifcdOreder = ifcdOreder;
 	}
 	public String getIfcgName() {
 		return ifcgName;
@@ -25,14 +40,6 @@ public class Code {
 	public void setIfcgDelNy(Integer ifcgDelNy) {
 		this.ifcgDelNy = ifcgDelNy;
 	}
-
-
-
-	
-	private String ifcdSeq;
-	private String ifcdName;
-	private Integer ifcdOrder;
-	
 	public String getIfcdSeq() {
 		return ifcdSeq;
 	}
@@ -45,16 +52,12 @@ public class Code {
 	public void setIfcdName(String ifcdName) {
 		this.ifcdName = ifcdName;
 	}
-
-	public Integer getIfcdOrder() {
-		return ifcdOrder;
+	public Integer getIfcdDelNy() {
+		return ifcdDelNy;
 	}
-	public void setIfcdOrder(Integer ifcdOrder) {
-		this.ifcdOrder = ifcdOrder;
+	public void setIfcdDelNy(Integer ifcdDelNy) {
+		this.ifcdDelNy = ifcdDelNy;
 	}
-	
-
-
 
 	
 

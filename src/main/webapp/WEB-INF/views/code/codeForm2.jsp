@@ -5,9 +5,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
 
-<form method="post" action="/infar/code/codeUpdt">
-	<input type="hidden" name="ifcdSeq" value="${rt.ifcdSeq}"/>">
-	<input type="text" name="ifcdName" placeholder="아이디" value="<c:out value="${rt.ifcdName}"/>">
+
+<form method="post" action="/infra/code/codeUpdt">
+	<input type="hidden" name="ifcdSeq" value="${item.ifcdSeq}"/>
+	<input type="text" name="ifcdName" placeholder="아이디" value="<c:out value="${item.ifcdName}"/>">
 	<input type="submit" value="제출">
 </form>
 

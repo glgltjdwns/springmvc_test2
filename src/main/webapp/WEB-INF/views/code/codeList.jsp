@@ -5,8 +5,8 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
 
-codeList
 
+CodeList
 
  <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
@@ -17,8 +17,7 @@ codeList
 	<c:otherwise>
 		<c:forEach items="${list}" var="item" varStatus="status">	
 		
-	<c:out value="${item.ifcdSeq}"/> | <a href="/infra/code/codeView?ifcgSeq=${item.ifcdSeq}"><c:out value="${item.ifcdName}"/></a> | <c:out value="${item.ifcdDelNy}"/> | <c:out value="${item.ifcdOrder}"/> <br>
-	
+	<c:out value="${item.ifcdSeq}"/> | <a href="/infra/code/codeView?ifcdSeq=${item.ifcdSeq}"><c:out value="${item.ifcdName}"/></a> | <c:out value="${item.ifcdDelNy}"/> <br>
 		
 		</c:forEach>
 	</c:otherwise>
@@ -27,18 +26,3 @@ codeList
 
 
 
-
-<%-- <c:choose>
-	<c:when test="${fn:length(list) eq 0}">
-		<tr>
-			<td class="text-center" colspan="9">There is no data!</td>
-		</tr>	
-	</c:when>
-	<c:otherwise>
-		<c:forEach items="${list}" var="item" varStatus="status">	
-		
-		<c:out value="${item.ifcgSeq}"/> | <a href="/infra/code/codeGroupView?ifcgSeq=${item.ifcgSeq}"><c:out value="${item.ifcgName}"/></a> | <c:out value="${item.ifcgDelNy}"/> <br>
-		
-		</c:forEach>
-	</c:otherwise>
-</c:choose>	  --%>

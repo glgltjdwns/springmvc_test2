@@ -10,69 +10,69 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CodeController {
 
-//	@Autowired
-//	CodeServiceImpl service;
-//	
-//	@RequestMapping(value = "/code/codeGroupList")
-//	public String codeGroupList(Model model) throws Exception {
-//		
-//		List<Code> list = service.selectList();
-//		
-//		model.addAttribute("list",list);
-//		
-//		return "code/codeGroupList";
-//	}
-//	
-//	
-//	@RequestMapping(value = "/code/codeGroupForm")
-//	public String codeGroupForm() throws Exception {
-//		
-//		return "code/codeGroupForm";
-//		
-//	}
-//	
-//	@RequestMapping(value = "/code/codeGroupInst")
-//	public String codeGroupInst(Code dto) throws Exception {
-//		
-//		System.out.println("");
-//		
-//		
-//		//입력 실행
-//		service.insert(dto);
-//		return "";
-//		
-//	}
-//	@RequestMapping(value = "/code/codeGroupView")
-//	public String codeGroupView(CodeVo vo ,Model model) throws Exception {
-//		
-//		System.out.println("vo.getIfcgSeq(): " + vo.getIfcgSeq());
-//		
-//		// 디비까지 가서 한 건의 데이터 값을 가지고 온다, VO
-//		Code rt = service.selectOne(vo);
-//		
-//		//가지고 온값을 jsp로 넘겨준다
-//		model.addAttribute("item",rt);
-//		return "code/codeGroupView";
-//		
-//	}
-//	@RequestMapping(value = "/code/codeGroupForm2")
-//	public String codeGroupForm2(CodeVo vo , Model model) throws Exception {
-//		
-//		Code rt = service.selectOne(vo);
-//			
-//		
-//		model.addAttribute("rt", rt);
-//		
-//		return"code/codeGroupForm2";
-//	}
-//	
-//	@RequestMapping(value = "/code/codeGroupUpdt")
-//	public String codeGroupUpdt(Code dto) throws Exception {
-//		
-//		service.update(dto);
-//		
-//		return"";
-//	}
+	@Autowired
+	CodeServiceImpl service;
+//	infrCodeGroup	
+	@RequestMapping(value = "/code/codeGroupList")
+	public String codeGroupList(Model model) throws Exception {
+		
+		List<Code> list = service.selectList();
+		
+		model.addAttribute("list",list);
+		
+		return "code/codeGroupList";
+	}
+	
+	
+	@RequestMapping(value = "/code/codeGroupForm")
+	public String codeGroupForm() throws Exception {
+		
+		return "code/codeGroupForm";
+		
+	}
+	
+	@RequestMapping(value = "/code/codeGroupInst")
+	public String codeGroupInst(Code dto) throws Exception {
+		
+		System.out.println("");
+		
+		
+		//입력 실행
+		service.insert(dto);
+		return "";
+		
+	}
+	@RequestMapping(value = "/code/codeGroupView")
+	public String codeGroupView(CodeVo vo ,Model model) throws Exception {
+		
+		System.out.println("vo.getIfcgSeq(): " + vo.getIfcgSeq());
+		
+		// 디비까지 가서 한 건의 데이터 값을 가지고 온다, VO
+		Code rt = service.selectOne(vo);
+		
+		//가지고 온값을 jsp로 넘겨준다
+		model.addAttribute("item",rt);
+		return "code/codeGroupView";
+		
+	}
+	@RequestMapping(value = "/code/codeGroupForm2")
+	public String codeGroupForm2(CodeVo vo , Model model) throws Exception {
+		
+		Code rt = service.selectOne(vo);
+			
+		
+		model.addAttribute("rt", rt);
+		
+		return"code/codeGroupForm2";
+	}
+	
+	@RequestMapping(value = "/code/codeGroupUpdt")
+	public String codeGroupUpdt(Code dto) throws Exception {
+		
+		service.update(dto);
+		
+		return"";
+	}
 	// 수정폼이 보여지는 주소
 		//한건의 데이터를 가져와야겠죠
 	
@@ -84,31 +84,36 @@ public class CodeController {
 	// ---------------------------------------------
 	// code
 	@RequestMapping(value = "/code/codeList")
-	public String codeList(Model model) throws Exception {
+	public String codeList(Model model) throws Exception {			//함수선언
 		
-		List<Code> list = service.selectList();
+		List<Code> list = service.selectListCode(); //listJsp	//db잡
 		
-		model.addAttribute("list",list);
+		model.addAttribute("list",list); // listJsp / listjava
 		
 		return "code/codeList";
 		
 		
 	}
 	@RequestMapping(value = "/code/codeForm")
-	public String codeForm() throws Exception {
+	public String codeForm(Model model) throws Exception {
+		
+		List<Code> list = service.selectList(); 
+		model.addAttribute("list",list);
 		
 		return "code/codeForm";
 		
 	}
 	
+
 	@RequestMapping(value = "/code/codeInst")
-	public String codeInst(Code dto) throws Exception {
+	public String codeInst(Model model ,Code dto) throws Exception {
 		
-		System.out.println("");
-		
+		System.out.println("dto.getIfcdName(): " + dto.getIfcdName());
 		
 		//입력 실행
-		service.insert(dto);
+		int item = service.insertCode(dto);
+		
+		System.out.println("item: " + item);
 		return "";
 		
 	}
@@ -119,7 +124,7 @@ public class CodeController {
 		System.out.println("vo.getIfcdSeq(): " + vo.getIfcdSeq());
 		
 		// 디비까지 가서 한 건의 데이터 값을 가지고 온다, VO
-		Code rt = service.selectOne(vo);
+		Code rt = service.selectOneCode(vo);
 		
 		//가지고 온값을 jsp로 넘겨준다
 		model.addAttribute("item",rt);
@@ -130,18 +135,18 @@ public class CodeController {
 	@RequestMapping(value = "/code/codeForm2")
 	public String codeForm2(CodeVo vo , Model model) throws Exception {
 		
-		Code rt = service.selectOne(vo);
+		Code rt = service.selectOneCode(vo);
 			
 		
-		model.addAttribute("rt", rt);
+		model.addAttribute("item", rt);
 		
-		return"code/codeForm2";
+		return "code/codeForm2";
 	}
 	
 	@RequestMapping(value = "/code/codeUpdt")
 	public String codeUpdt(Code dto) throws Exception {
 		
-		service.update(dto);
+		service.updateCode(dto);
 		
 		return"";
 	}

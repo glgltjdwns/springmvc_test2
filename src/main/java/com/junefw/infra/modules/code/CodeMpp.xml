@@ -8,66 +8,10 @@
 
     <resultMap id="resultMapObj" type="com.junefw.infra.modules.code.Code"></resultMap> <!-- 결과 객체 지정 -->
 
-
- 	<select id="selectList" resultMap="resultMapObj">
-		SELECT
-			a.ifcdSeq
-		    , a.ifcdName
-		    , a.ifcdDelNy
-		FROM
-			infrCode a
-		WHERE 1=1
-			and ifcdDelNy = 0
-	</select>
-
-
-	<insert id="insert">
-		INSERT INTO infrCode (
-			ifcdName
-			,ifcdDelNy
-		) VALUES (
-			#{ifcdName}
-			,0
-		)
-	</insert>
-
-	<select id="selectOne" resultMap="resultMapObj">
-		SELECT
-			a.ifcdSeq
-		    , a.ifcdName
-		    , a.ifcdDelNy
-		FROM
-			infrCodeGroup a
-		WHERE 1=1
-			AND ifcdSeq = #{ifcdSeq}
-	</select>
 	
-		
-	<update id="update">
-		UPDATE infrCode SET
-			ifcdName = #{ifcdName}
-		WHERE 1=1
-			AND ifcdSeq = #{ifcdSeq}
-	</update>
-	
-<!--                  asdasd                        -->	
-	
-<select id="selectList" resultMap="resultMapObj">
-	select
-		a.ifcgSeq
-		,a.ifcgName
-		,b.ifcdSeq
-		,b.ifcdName
-		,b.ifcdOrder
-	from infrcodegroup a
-			left join infrcode b on b.ifcgSeq = a.ifcgSeq
-		order by a.ifcgSeq, b.ifcdOrder; 
-</select> 
+<!-- infrCodeGroup  -->	
 
-	
-	
-
-	<!-- <select id="selectList" resultMap="resultMapObj">
+	 <select id="selectList" resultMap="resultMapObj">
 		SELECT
 			a.ifcgSeq
 		    , a.ifcgName
@@ -104,7 +48,54 @@
 			ifcgName = #{ifcgName}
 		WHERE 1=1
 			AND ifcgSeq = #{ifcgSeq}
-	</update>  -->
+	</update>  
+	
+	<!--infr Code  -->
+	
+	<select id="selectListCode" resultMap="resultMapObj">
+		SELECT
+			a.ifcdSeq
+		    , a.ifcdName
+		    , a.ifcdDelNy
+		    , a.ifcdOrder
+		FROM
+			infrCode a
+		WHERE 1=1
+			AND a.ifcdDelNy = 0
+	</select>
+	
+	<insert id="insertCode">
+		INSERT INTO infrCode (
+			ifcdName
+			,ifcdDelNy
+			,ifcgSeq
+		) VALUES (
+			#{ifcdName}
+			,0
+			,#{ifcgSeq}
+		)
+	</insert>
+	
+	<select id="selectOneCode" resultMap="resultMapObj">
+		SELECT
+			a.ifcdSeq
+		    , a.ifcdName
+		    , a.ifcdDelNy
+		FROM
+			infrCode a
+		WHERE 1=1
+			AND a.ifcdSeq = #{ifcdSeq}
+	</select>
+	
+	<update id="updateCode">
+		UPDATE infrCode SET
+			ifcdName = #{ifcdName}
+		WHERE 1=1
+			AND ifcdSeq = #{ifcdSeq}
+	</update>  
+
+	
+	
 	
 	
 </mapper>
