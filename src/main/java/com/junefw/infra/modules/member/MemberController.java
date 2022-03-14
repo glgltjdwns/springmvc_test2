@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 @Controller
 public class MemberController {
 
@@ -14,7 +15,6 @@ public class MemberController {
 	MemberServiceImpl service;
 	
 	@RequestMapping(value = "/member/memberList")
-//	public String memberList(@ModelAttribute("vo") MemberVo vo, Model model) throws Exception {
 	public String memberList(Model model) throws Exception {
 
 		List<Member> list = service.selectList();
@@ -32,15 +32,48 @@ public class MemberController {
 	@RequestMapping(value = "/member/memberInst")
 	public String memberInst(Model model, Member dto) throws Exception {
 		
-		System.out.println("dto.getIfmmId(): " + dto.getIfmmId());
-		System.out.println("dto.getIfmmName(): " + dto.getIfmmName());
-
+	
 		// 입력을 작동시킨다.
-		int result = service.insert(dto);
+		int itme = service.insert(dto);
 		
-		System.out.println("result: " + result);
+		System.out.println("itme" + itme);
 
 		return "";
 	}
+	
+
+	@RequestMapping(value = "/Member/MemberView")
+	public String memberView(MemberVo vo ,Model model) throws Exception {
+		
+		System.out.println("vo.getIfmmSeq(): " + vo.getIfmmSeq());
+		
+		// 디비까지 가서 한 건의 데이터 값을 가지고 온다, VO
+		Member rt = service.selectOne(vo);
+		
+		//가지고 온값을 jsp로 넘겨준다
+		model.addAttribute("item",rt);
+		return "member/memberView";
+		
+	}
+	@RequestMapping(value = "/member/memberForm2")
+	public String memberForm2(MemberVo vo , Model model) throws Exception {
+		
+		Member rt = service.selectOne(vo);
+	
+			
+		
+		model.addAttribute("item", rt);
+		
+		return"member/memberForm2";
+	}
+	
+	@RequestMapping(value = "/member/memberUpdt")
+	public String memberUpdt(Member dto) throws Exception {
+		
+		service.update(dto);
+		
+		return"";
+	}
+	
 	
 }

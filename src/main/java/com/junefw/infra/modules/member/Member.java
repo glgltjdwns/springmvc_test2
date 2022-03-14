@@ -4,6 +4,9 @@ public class Member {
 	private String ifmmSeq;
 	private String ifmmId;
 	private String ifmmName;
+	private String ifmmPassword;
+	private Integer ifmmGenderCd;
+	private Integer ifmmSavedCd;
 	private Integer ifmmDelNy;
 //------------
 	public String getIfmmSeq() {
@@ -23,6 +26,24 @@ public class Member {
 	}
 	public void setIfmmName(String ifmmName) {
 		this.ifmmName = ifmmName;
+	}
+	public String getIfmmPassword() {
+		return ifmmPassword;
+	}
+	public void setIfmmPassword(String ifmmPassword) {
+		this.ifmmPassword = ifmmPassword;
+	}
+	public Integer getIfmmGenderCd() {
+		return ifmmGenderCd;
+	}
+	public void setIfmmGenderCd(Integer ifmmGenderCd) {
+		this.ifmmGenderCd = ifmmGenderCd;
+	}
+	public Integer getIfmmSavedCd() {
+		return ifmmSavedCd;
+	}
+	public void setIfmmSavedCd(Integer ifmmSavedCd) {
+		this.ifmmSavedCd = ifmmSavedCd;
 	}
 	public Integer getIfmmDelNy() {
 		return ifmmDelNy;

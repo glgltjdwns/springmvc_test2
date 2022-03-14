@@ -6,93 +6,109 @@
 
 <mapper namespace="com.junefw.infra.modules.code.CodeMpp"> <!-- 지금 파일 위치 지정 -->
 
-    <resultMap id="resultMapObj" type="com.junefw.infra.modules.code.Code"></resultMap> <!-- 결과 객체 지정 -->
+<resultMap id="resultMapObj" type="com.junefw.infra.modules.code.Code"></resultMap> <!--  mybatis인가 이거 사용해주기 위해 쓰는거임 결과의 객체를 지칭 -->
 
-	
-<!-- infrCodeGroup  -->	
 
-	 <select id="selectList" resultMap="resultMapObj">
-		SELECT
-			a.ifcgSeq
-		    , a.ifcgName
-		    , a.ifcgDelNy
-		FROM
-			infrCodeGroup a
-		WHERE 1=1
-			and ifcgDelNy = 0
+
+
+	<!-- infrCodeGroup  -->
+	<select id="selectList" resultMap="resultMapObj">
+			 SELECT 
+					a.ifcgSeq
+					, a.ifcgName
+					, a.ifcgDelNy
+					, a.ifcgNameEng
+			 FROM 
+					infrCodeGroup a <!-- 여기 앞에 .alpha 를 넣으니까 404오류떳엇음 첫번째  -->
+			 WHERE 1=1
+			 			<!-- AND ifcgDelNy = 0
+ -->			 	<choose>
+					<when test="shIfcgDelNy == 1">AND ifcgDelNy = 1</when>
+					<when test="shIfcgDelNy == 0">AND ifcgDelNy = 0</when>
+					</choose>	
+				 <if test="shIfcgName != null and !shIfcgName.equals('')"> AND ifcgName LIKE concat('%',#{shIfcgName}, '%')</if>
+					<choose>
+					<when test="shOption == 1">AND a.ifcgName LIKE concat('%',#{shValue}, '%')</when>
+					<when test="shOption == 2">AND a.ifcgNameEng LIKE concat('%',#{shValue}, '%')</when>
+					</choose>	
 	</select>
-	
+
 	<insert id="insert">
-		INSERT INTO infrCodeGroup (
-			ifcgName
-			,ifcgDelNy
-		) VALUES (
-			#{ifcgName}
-			,0
-		)
+			INSERT INTO infrCodeGroup(
+				ifcgName
+				,ifcgDelNy
+			) VALUES (
+				#{ifcgName}
+				,0
+			)
 	</insert>
 	
 	<select id="selectOne" resultMap="resultMapObj">
-		SELECT
+		select
 			a.ifcgSeq
 		    , a.ifcgName
 		    , a.ifcgDelNy
-		FROM
+		from
 			infrCodeGroup a
-		WHERE 1=1
-			AND ifcgSeq = #{ifcgSeq}
+		where 1=1
+			and ifcgSeq = #{ifcgSeq}
 	</select>
 	
 	<update id="update">
-		UPDATE infrCodeGroup SET
-			ifcgName = #{ifcgName}
-		WHERE 1=1
-			AND ifcgSeq = #{ifcgSeq}
-	</update>  
+			UPDATE
+				infrCodeGroup  <!-- 진짜 중요한게 테이블 이름틀리면 505 Error 불변임  -->
+			SET 
+				ifcgName = #{ifcgName}
+			WHERE 1=1
+				AND ifcgSeq = #{ifcgSeq}
+	</update>
 	
-	<!--infr Code  -->
-	
+	<!-- infrCode  -->
 	<select id="selectListCode" resultMap="resultMapObj">
-		SELECT
-			a.ifcdSeq
-		    , a.ifcdName
-		    , a.ifcdDelNy
-		    , a.ifcdOrder
-		FROM
-			infrCode a
-		WHERE 1=1
-			AND a.ifcdDelNy = 0
+			 SELECT 
+					a.ifcdSeq
+					, a.ifcdName
+					, a.ifcdDelNy
+			 FROM 
+					infrCode a <!-- 여기 앞에 .alpha 를 넣으니까 404오류떳엇음 첫번째  -->
+			 WHERE 1=1
+					AND ifcdDelNy = 0
+					 <if test="shIfcgSeq != null and !shIfcgSeq.equals('')"> AND ifcgSeq =(#{shIfcgSeq})</if>
 	</select>
-	
+
 	<insert id="insertCode">
-		INSERT INTO infrCode (
-			ifcdName
-			,ifcdDelNy
-			,ifcgSeq
-		) VALUES (
-			#{ifcdName}
-			,0
-			,#{ifcgSeq}
-		)
+			INSERT INTO infrCode(
+				ifcdName
+				,ifcdDelNy
+				,ifcgSeq
+			) VALUES (
+				#{ifcdName}
+				,0
+				,#{ifcgSeq}
+			)
 	</insert>
 	
 	<select id="selectOneCode" resultMap="resultMapObj">
-		SELECT
+		select
 			a.ifcdSeq
 		    , a.ifcdName
 		    , a.ifcdDelNy
-		FROM
+		from
 			infrCode a
-		WHERE 1=1
-			AND a.ifcdSeq = #{ifcdSeq}
+		where 1=1
+			and ifcdSeq = #{ifcdSeq}
+			
 	</select>
 	
 	<update id="updateCode">
-		UPDATE infrCode SET
-			ifcdName = #{ifcdName}
-		WHERE 1=1
-			AND ifcdSeq = #{ifcdSeq}
-	</update>  
+			UPDATE
+				infrCode  <!-- 진짜 중요한게 테이블 이름틀리면 505 Error 불변임  -->
+			SET 
+				ifcdName = #{ifcdName}
+			WHERE 1=1
+				AND ifcdSeq = #{ifcdSeq}
+	</update>
+	 
 
 	
 	

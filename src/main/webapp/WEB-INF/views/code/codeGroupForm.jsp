@@ -6,6 +6,7 @@
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
 
 <form method="post" action="/infar/code/codeGroupInst">
-	<input type="text" name="ifcgName" placeholder="아이디">
+	<input type="text" name="ifcgId" placeholder="아이디">
+	<input type="text" name="ifcgName" placeholder="이름">
 	<input type="submit" value="제출">
 </form>

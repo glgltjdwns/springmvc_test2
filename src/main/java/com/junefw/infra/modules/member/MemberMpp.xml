@@ -13,24 +13,52 @@
 				ifmmSeq
 				, ifmmId
 				, ifmmName
+				, ifmmPassword
+				, ifmmGenderCd
+				, ifmmSavedCd
+				, ifmmDelNy
 			from
-				infrMember
+				infrMember a
+			where 1=1
+			
+				And ifmmDelNy = 0
 	</select>
 	
 	<insert id="insert">
 		insert into infrMember (
 			ifmmId
 			,ifmmName
+			,ifmmPassword
+			,ifmmGenderCd
+			,ifmmSavedCd
 			,ifmmDelNy
 		) values (
 			#{ifmmId}
 			,#{ifmmName}
+			,#{ifmmPassword}
+			,0
+			,0	
 			,0
 		)
 	</insert>
 
+	<select id="selectOne" resultMap="resultMapObj">
+		SELECT
+			a.ifmmSeq
+		    , a.ifmmName
+		    , a.ifmmDelNy
+		FROM
+			infrMember a
+		WHERE 1=1
+			AND ifmmSeq = #{ifmmSeq}
+	</select>
 	
-	
+	<update id="update">
+		UPDATE infrMember SET
+			ifmmName = #{ifmmName}
+		WHERE 1=1
+			AND ifmmSeq = #{ifmmSeq}
+	</update>  
 	
 	
 </mapper>

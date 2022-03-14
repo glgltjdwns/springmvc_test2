@@ -6,8 +6,8 @@
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
 
 <form method="post" action="/infar/code/codeGroupUpdt">
-	<input type="hidden" name="ifcgSeq" value="${rt.ifcgSeq}"/>">
-	<input type="text" name="ifcgName" placeholder="아이디" value="<c:out value="${rt.ifcgName}"/>">
+	<input type="hidden" name="ifcgSeq" value="${item.ifcgSeq}"/>
+	<input type="text" name="ifcgName" placeholder="아이디" value="<c:out value="${item.ifcgName}"/>">
 	<input type="submit" value="제출">
 </form>
 

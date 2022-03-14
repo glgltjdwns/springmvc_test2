@@ -5,6 +5,26 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
 
+ <select name="shIfcgDelNy">
+	<option value="">::삭제여부::
+	<option value="1">Y
+	<option value="0">N
+</select>
+||
+회원이름 : <input type="text" name="shIfcgName">
+||
+<select name="shIfcgDelNy">
+	<option value="">::검색구분::
+	<option value="1">한글
+	<option value="0">영문
+</select>
+<input type="text" name="shValue">
+<input type="submit" name="search">
+
+<br> 
+
+
+
 <c:choose>
 	<c:when test="${fn:length(list) eq 0}">
 		<tr>

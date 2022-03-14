@@ -6,12 +6,13 @@
 <%@ taglib prefix="rb" uri="http://www.springframework.org/tags" %>
 
 
-<c:out value="${rt.ifcgSeq}"/> | <c:out value="${rt.ifcgName}"/> | <c:out value="${rt.ifcgDelNy}"/> <br>
+<c:out value="${item.ifcgSeq}"/> | <c:out value="${item.ifcgName}"/> | <c:out value="${item.ifcgDelNy}"/> <br>
 
-<a href="/infra/code/codeGroupForm2?ifcgSeq=<c:out value="${rt.ifcgName}"/>">수정</a>
+<a href="/infra/code/codeGroupForm2?ifcgSeq=<c:out value="${item.ifcgName}"/>">수정</a>
 
 <form method="post" action="codeGroupUpdt">
-	<input type="text" name="ifcgSeq" value="${rt.ifcgSeq}" style="visibility:hidden;">
-	<input type="text" name="ifcgChangeName" placeholder="바꿀NAME">
-	<input type="submit" value="제출">
+	<input type="text" name="ifmmSeq" value="${item.ifcgSeq}" style="visibility:hidden;">
+ <!-- 	<input type="text" name="ifcgChangeName" placeholder="바꿀NAME"> 
+	<input type="submit" value="제출"> -->
 </form>
+
